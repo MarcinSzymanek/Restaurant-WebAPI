@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace HotelRestaurantAPI.Models;
+namespace HotelRestaurantAPI.Models.Staff;
 
 public class BaseUser : IdentityUser
 {

@@ -1,5 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
-using HotelRestaurantAPI.Models;
+using HotelRestaurantAPI.Models.Staff;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
