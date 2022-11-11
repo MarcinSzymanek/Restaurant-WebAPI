@@ -5,9 +5,12 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var staffConnectionString = builder.Configuration.GetConnectionString("staffDbConnection");
+var hotelConnectionString = builder.Configuration.GetConnectionString("hotelDbConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(staffConnectionString));
+builder.Services.AddDbContext<HotelDataContext>(options =>
+    options.UseSqlServer(hotelConnectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
