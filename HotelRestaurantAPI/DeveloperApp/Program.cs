@@ -1,22 +1,18 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Configuration;
+using DeveloperApp.Tools;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Models;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-Room r404 = new Room() { RoomNumber = 404 };
+GuestAdult g1 = new GuestAdult() { FirstName = "Janek", LastName = "Kowalski", PhoneNumber = "42424242" };
 
 Console.WriteLine("Hello, World!");
 
-var configBuilder = new ConfigurationBuilder().AddJsonFile("appsettings.json",false);
-var c = configBuilder.Build();
-var hotelConnString = c.GetConnectionString("hotelDbConnection");
-var optionsBuilder = new DbContextOptionsBuilder();
-optionsBuilder.UseSqlServer(hotelConnString);
-var context = new HotelDataContext(optionsBuilder.Options);
+DbManager manager = new();
 
 Console.WriteLine("Database loaded");
 
@@ -35,33 +31,48 @@ while (!done)
         case "seed":
         {
             Console.WriteLine("Seeding data.");
-            using (var transaction = context.Database.BeginTransaction())
+            try
             {
-                context.Rooms.Add(r404);
-                // Only need to do this once
-                //context.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.Rooms ON;");
-                var success = await context.SaveChangesAsync();
-                if (success != -1)
-                {
-                    Console.WriteLine("Seems to work");
-                    transaction.Commit();
-                    break;
-                }
+                manager.Seeder.SeedRooms();
             }
-            Console.WriteLine("nuh-uh");
+            catch(Exception ex)
+            {
+                Console.WriteLine("nuh-uh");
+                Console.WriteLine(ex.ToString());
+            }
             break;
         }
         case "reset":
         {
             Console.WriteLine("Resetting HotelDbContext");
+            // Add code to delete all entries from db here
             break;
         }
         case "rooms":
         {
-            var rooms = await context.Rooms.ToListAsync();
+            var rooms = await manager.Context.Rooms.ToListAsync();
             foreach (var r in rooms)
             {
                 Console.WriteLine("Room: " + r.RoomNumber + " exists!");
+            }
+
+            break;
+        }
+        case "reservations":
+        {
+            var res = await manager.GetAll<Reservation>();
+            foreach (var r in res)
+            {
+                Console.WriteLine(r.Day);
+            }
+            break;
+        }
+        case "guests":
+        {
+            var guests = await manager.Context.Guests.ToListAsync();
+            foreach (var g in guests)
+            {
+                Console.WriteLine(g.FirstName + " " + g.LastName + " Id:" + g.Id);
             }
 
             break;

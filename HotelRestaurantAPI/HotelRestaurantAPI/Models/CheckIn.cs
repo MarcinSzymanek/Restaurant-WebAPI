@@ -14,4 +14,5 @@ public class CheckIn
     public Guest Guest { get; set; }
     [Required]
     public DateTime Date { get; set; }
+    public Reservation Reservation { get; set; }
 }
