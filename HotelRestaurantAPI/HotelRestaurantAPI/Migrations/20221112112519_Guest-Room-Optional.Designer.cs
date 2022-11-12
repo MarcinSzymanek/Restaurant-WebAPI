@@ -4,6 +4,7 @@ using HotelRestaurantAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelRestaurantAPI.Migrations
 {
     [DbContext(typeof(HotelDataContext))]
-    partial class HotelDataContextModelSnapshot : ModelSnapshot
+    [Migration("20221112112519_Guest-Room-Optional")]
+    partial class GuestRoomOptional
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,12 +38,6 @@ namespace HotelRestaurantAPI.Migrations
                     b.Property<int>("GuestId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ReservationDay")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReservationMonth")
-                        .HasColumnType("int");
-
                     b.Property<int>("RoomNumber")
                         .HasColumnType("int");
 
@@ -50,8 +46,6 @@ namespace HotelRestaurantAPI.Migrations
                     b.HasIndex("GuestId");
 
                     b.HasIndex("RoomNumber");
-
-                    b.HasIndex("ReservationDay", "ReservationMonth");
 
                     b.ToTable("CheckIns");
                 });
@@ -85,25 +79,6 @@ namespace HotelRestaurantAPI.Migrations
                     b.ToTable("Guests");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Guest");
-                });
-
-            modelBuilder.Entity("HotelRestaurantAPI.Models.Reservation", b =>
-                {
-                    b.Property<int>("Day")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Month")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GAmount")
-                        .HasColumnType("int");
-
-                    b.HasKey("Day", "Month");
-
-                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("HotelRestaurantAPI.Models.Room", b =>
@@ -151,15 +126,7 @@ namespace HotelRestaurantAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelRestaurantAPI.Models.Reservation", "Reservation")
-                        .WithMany("CheckIns")
-                        .HasForeignKey("ReservationDay", "ReservationMonth")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Guest");
-
-                    b.Navigation("Reservation");
 
                     b.Navigation("Room");
                 });
@@ -171,11 +138,6 @@ namespace HotelRestaurantAPI.Migrations
                         .HasForeignKey("RoomNumber");
 
                     b.Navigation("Room");
-                });
-
-            modelBuilder.Entity("HotelRestaurantAPI.Models.Reservation", b =>
-                {
-                    b.Navigation("CheckIns");
                 });
 
             modelBuilder.Entity("HotelRestaurantAPI.Models.Room", b =>

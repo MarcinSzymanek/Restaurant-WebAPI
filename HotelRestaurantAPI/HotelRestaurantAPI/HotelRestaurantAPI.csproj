@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Management\" />
+    <Folder Include="HotelControllers\" />
   </ItemGroup>
 
 </Project>

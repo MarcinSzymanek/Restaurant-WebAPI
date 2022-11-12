@@ -5,7 +5,7 @@ VisualStudioVersion = 17.3.32901.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelRestaurantAPI", "HotelRestaurantAPI\HotelRestaurantAPI.csproj", "{5B37AA46-A469-483B-8CFC-BCDAF4746317}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeveloperApp", "DeveloperApp\DeveloperApp.csproj", "{5FBBC0ED-FB45-46E6-82C0-E2EE07BD37E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeveloperApp", "DeveloperApp\DeveloperApp.csproj", "{5FBBC0ED-FB45-46E6-82C0-E2EE07BD37E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

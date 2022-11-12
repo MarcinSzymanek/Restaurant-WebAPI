@@ -1,0 +1,27 @@
+﻿@page
+@model HotelRestaurantAPI.Pages.Management.ReceptionModel
+@{
+    ViewData["Title"] = "Manage guests";
+}
+
+<div class="row-cols-2">
+    <div class="col">
+        
+    </div>
+    <div class="col">
+        <h3>Add guests for breakfast</h3>
+        <br/>
+        <div>
+            <form>
+                Date: <input class="form-control" asp-for="Input.Date" />
+                <br/>
+                <h4>Enter guest amount: </h4>
+                <label for="amount" title="Guest amount: "></label>
+                <input id="amount" type="number" asp-for="Input.GuestAmount">
+                <br/>
+                <br/>
+                <button>Add</button>
+            </form>
+        </div>
+    </div>
+</div>
