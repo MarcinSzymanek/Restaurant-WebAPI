@@ -24,7 +24,7 @@ namespace HotelRestaurantAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckIn", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckedIn", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -112,7 +112,7 @@ namespace HotelRestaurantAPI.Migrations
                     b.HasDiscriminator().HasValue("GuestChild");
                 });
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckIn", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckedIn", b =>
                 {
                     b.HasOne("HotelRestaurantAPI.Models.Guest", "Guest")
                         .WithMany()

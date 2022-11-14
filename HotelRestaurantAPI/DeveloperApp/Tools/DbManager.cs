@@ -26,41 +26,32 @@ public class DbManager
         _seeder = new(_hotelContext);
 
     }
+
+    public bool ResetHotelDb()
+    {
+        var breakfasts = _hotelContext.DailyBreakfasts.ToList();
+ 
+        try
+        {
+            foreach (var b in breakfasts)
+            {
+                _hotelContext.DailyBreakfasts.Remove(b);
+                _hotelContext.SaveChanges();
+            }
+        }
+        catch
+        {
+            return false;
+        }
+        return true;
+    }
+
     public T Get<T>(object[] key) where T : class
     {
         var result = _hotelContext.Find<T>(key);
         return result;
     }
 
-    public async Task<List<T>?> GetAll<T>() where T : class
-    {
-        Type r = typeof(Reservation);
-        Type g = typeof(Guest);
-        Type c = typeof(CheckIn);
-        Type type = typeof(T);
-        List<T> result;
-        if (type == r)
-        {
-            result = new List<T>();
-            var res = await _hotelContext.Reservations.ToListAsync();
-            try
-            {
-                foreach (Reservation reservation in res)
-                {
-                    result.Add(reservation as T);
-                }
-            }
-            catch
-            {
-                Console.WriteLine("Types incompatible!!!");
-                Console.WriteLine("Manager tool failure.");
-                Environment.Exit(-1);
-            }
-            return result;
-        }
-
-        return null;
-    }
 
     public HotelDataContext SetupHotelContext()
     {
