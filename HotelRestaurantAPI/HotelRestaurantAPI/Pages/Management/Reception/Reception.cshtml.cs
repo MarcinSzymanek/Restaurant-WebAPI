@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelRestaurantAPI.Pages.Management
 {
@@ -36,6 +37,7 @@ namespace HotelRestaurantAPI.Pages.Management
         
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPostAsync()
