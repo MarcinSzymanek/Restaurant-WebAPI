@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelRestaurantAPI.Pages.Management.Reception
 {
+    [Authorize("ReceptionStaff")]
     public class DisplayBreakfastDataModel : PageModel
     {
         private DateTime _now = DateTime.Now;

@@ -2,11 +2,22 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+@{
+    string titler = "";
+    if (User.HasClaim("ReceptionAccess", "true"))
+    {
+        titler = "Receptionist";
+    }
+    
+}
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity.GetType().Name @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+            @titler
+            @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value
+        </a>
     </li>
     <li class="nav-item">
         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post" >

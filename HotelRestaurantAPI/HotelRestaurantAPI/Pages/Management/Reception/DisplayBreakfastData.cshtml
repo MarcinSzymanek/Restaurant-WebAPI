@@ -2,20 +2,19 @@
 @model HotelRestaurantAPI.Pages.Management.Reception.DisplayBreakfastDataModel
 
 <p>
-    <a asp-page="Create">Create New</a>
-    @Model.DateNow;
+    <h2> Had breakfast at @Model.DateNow</h2>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                Html.DisplayNameFor(model => model.CheckIns[0].Room)
+                Room Number
             </th>
             <th>
-                Html.DisplayNameFor(model => model.CheckIns[0].Guest)
+                Adults
             </th>
             <th>
-                Html.DisplayNameFor(model => model.Reservation[0].ChildrenAmount)
+                Children
             </th>
             <th></th>
         </tr>
