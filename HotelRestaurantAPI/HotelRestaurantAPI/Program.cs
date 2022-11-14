@@ -1,5 +1,6 @@
 using System.Security.Claims;
 using HotelRestaurantAPI.Data;
+using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IReservationService, ReservationService>();
 
 Claim[] claimTypes = new Claim[3]
 {
@@ -48,6 +50,7 @@ builder.Services.Configure<IdentityOptions>(
     });
 
 var app = builder.Build();
+
 
 
 

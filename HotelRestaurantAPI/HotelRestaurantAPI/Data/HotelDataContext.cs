@@ -12,17 +12,19 @@ public class HotelDataContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Reservation>()
-            .HasKey(k => new { k.Day, k.Month });
+        modelBuilder.Entity<DailyBreakfast>().HasKey(k => new { k.Day, k.Month });
+
+        modelBuilder.Entity<DailyBreakfast>().HasMany(b => b.CheckedIn)
+            .WithOne(c => c.DailyBreakfast);
+        modelBuilder.Entity<DailyBreakfast>().HasOne(b => b.Expected)
+            .WithOne(e => e.DailyBreakfast)
+            .HasForeignKey<Expected>(e => new { e.Day, e.Month });
+
+        modelBuilder.Entity<CheckedIn>()
+            .HasKey(c => c.RoomNumber);
+
         base.OnModelCreating(modelBuilder);
     }
-
-    public DbSet<Room> Rooms { get; set; }
     
-    public DbSet<Guest> Guests { get; set; }
-    public DbSet<GuestAdult> Adults { get; set; }
-    public DbSet<GuestChild> Children { get; set; }
-
-    public DbSet<Reservation> Reservations { get; set; }
-    public DbSet<CheckIn> CheckIns { get; set; }
+    public DbSet<DailyBreakfast> DailyBreakfasts { get; set; }
 }

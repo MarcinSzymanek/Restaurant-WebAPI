@@ -1,0 +1,41 @@
+﻿@page
+@model HotelRestaurantAPI.Pages.Management.Reception.DisplayBreakfastDataModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+    @Model.DateNow;
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Html.DisplayNameFor(model => model.CheckIns[0].Room)
+            </th>
+            <th>
+                Html.DisplayNameFor(model => model.CheckIns[0].Guest)
+            </th>
+            <th>
+                Html.DisplayNameFor(model => model.Reservation[0].ChildrenAmount)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.CheckedIn) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adults)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Children)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

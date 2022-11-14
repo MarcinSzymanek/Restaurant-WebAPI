@@ -24,7 +24,7 @@ namespace HotelRestaurantAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckIn", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckedIn", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -86,7 +86,7 @@ namespace HotelRestaurantAPI.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Guest");
                 });
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.Reservation", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.DailyBreakfast", b =>
                 {
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -130,7 +130,7 @@ namespace HotelRestaurantAPI.Migrations
                     b.HasDiscriminator().HasValue("GuestChild");
                 });
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckIn", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.CheckedIn", b =>
                 {
                     b.HasOne("HotelRestaurantAPI.Models.Guest", "Guest")
                         .WithMany()
@@ -138,7 +138,7 @@ namespace HotelRestaurantAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HotelRestaurantAPI.Models.Reservation", "Reservation")
+                    b.HasOne("HotelRestaurantAPI.Models.DailyBreakfast", "DailyBreakfast")
                         .WithMany("CheckIns")
                         .HasForeignKey("ReservationDate")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -152,7 +152,7 @@ namespace HotelRestaurantAPI.Migrations
 
                     b.Navigation("Guest");
 
-                    b.Navigation("Reservation");
+                    b.Navigation("DailyBreakfast");
 
                     b.Navigation("Room");
                 });
@@ -166,7 +166,7 @@ namespace HotelRestaurantAPI.Migrations
                     b.Navigation("Room");
                 });
 
-            modelBuilder.Entity("HotelRestaurantAPI.Models.Reservation", b =>
+            modelBuilder.Entity("HotelRestaurantAPI.Models.DailyBreakfast", b =>
                 {
                     b.Navigation("CheckIns");
                 });
