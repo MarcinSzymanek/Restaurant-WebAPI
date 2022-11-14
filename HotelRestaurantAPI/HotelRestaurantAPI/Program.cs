@@ -34,6 +34,7 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("ReceptionStaff",
         policyBuilder => policyBuilder.RequireClaim("ReceptionAccess")
     );
+    options.AddPolicy("RestaurantStaff", policyBuilder => policyBuilder.RequireClaim("WaiterAccess"));
 });
     
 

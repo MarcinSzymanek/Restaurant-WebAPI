@@ -27,4 +27,5 @@ public class HotelDataContext : DbContext
     }
     
     public DbSet<DailyBreakfast> DailyBreakfasts { get; set; }
+    public DbSet<CheckedIn> CheckedIns { get; set; } 
 }

@@ -1,0 +1,33 @@
+﻿@page
+@model HotelRestaurantAPI.Pages.Management.RestaurantModel
+@{
+    ViewData["Title"] = "Restaurant";
+}
+
+<div class="text-center">
+    <h1 class="display-4"> Add guest to breakfast</h1>
+</div>
+
+<h3>Insert Room number, number of adults and number of children to check in for breakfast</h3>
+
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Input.RoomNumber"></label>
+        <input class="form-control" asp-for="Input.RoomNumber" min="1" />
+        <span asp-validation-for="Input.RoomNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.AdultAmount"></label>
+        <input class="form-control" asp-for="Input.AdultAmount" min="0" />
+        <span asp-validation-for="Input.AdultAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.ChildrenAmount"></label>
+        <input class="form-control" asp-for="Input.ChildrenAmount" min="0" />
+        <span asp-validation-for="Input.ChildrenAmount" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div asp-validation-summary="All" class="text-danger"></div>
+</form>
