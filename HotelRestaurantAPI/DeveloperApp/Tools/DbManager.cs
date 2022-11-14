@@ -30,7 +30,7 @@ public class DbManager
     public bool ResetHotelDb()
     {
         var breakfasts = _hotelContext.DailyBreakfasts.ToList();
- 
+        
         try
         {
             foreach (var b in breakfasts)
