@@ -1,20 +1,43 @@
+using System.Security.Claims;
 using HotelRestaurantAPI.Data;
+using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+var staffConnectionString = builder.Configuration.GetConnectionString("staffDbConnection");
+var hotelConnectionString = builder.Configuration.GetConnectionString("hotelDbConnection");
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(staffConnectionString));
+builder.Services.AddDbContext<HotelDataContext>(options =>
+    options.UseSqlServer(hotelConnectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+builder.Services.AddTransient<IReservationService, ReservationService>();
 
-// Disable password requirements so we can test easier.
+Claim[] claimTypes = new Claim[3]
+{
+    new Claim("ReceptionAccess",""),
+    new Claim("WaiterAccess", ""),
+    new Claim("KitchenAccess", "")
+};
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ReceptionStaff",
+        policyBuilder => policyBuilder.RequireClaim("ReceptionAccess")
+    );
+});
+    
+
+// Disable most requires so that we can test this
 // Only requirements: Password length >= 6, 1 Uppercase, 1 Lowercase
 builder.Services.Configure<IdentityOptions>(
     options =>
@@ -22,9 +45,12 @@ builder.Services.Configure<IdentityOptions>(
         options.Password.RequireDigit = false;
         options.Password.RequireNonAlphanumeric = false;
         options.Password.RequiredUniqueChars = 0;
+        options.SignIn.RequireConfirmedEmail = false;
+        options.SignIn.RequireConfirmedAccount = false;
     });
 
 var app = builder.Build();
+
 
 
 

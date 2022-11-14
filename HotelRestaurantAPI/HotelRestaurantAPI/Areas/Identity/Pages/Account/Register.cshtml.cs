@@ -12,6 +12,7 @@ using System.Text.Encodings.Web;
 using System.Threading;
 using System.Threading.Tasks;
 using HotelRestaurantAPI.Models;
+using HotelRestaurantAPI.Models.Staff;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -154,11 +155,7 @@ namespace HotelRestaurantAPI.Areas.Identity.Pages.Account
             Console.WriteLine("Something broke");
             return Page();
         }
-
-        private ReceptionUser CreateReceptionUser()
-        {
-            return Activator.CreateInstance<ReceptionUser>();
-        }
+        
 
         // All the allowed claims are shown here
         private readonly Claim[] _claims = new Claim[4]
