@@ -19,12 +19,11 @@ public class HotelDataContext : DbContext
         modelBuilder.Entity<DailyBreakfast>().HasOne(b => b.Expected)
             .WithOne(e => e.DailyBreakfast)
             .HasForeignKey<Expected>(e => new { e.Day, e.Month });
-
-        modelBuilder.Entity<CheckedIn>()
-            .HasKey(c => c.RoomNumber);
-
+        
         base.OnModelCreating(modelBuilder);
     }
     
     public DbSet<DailyBreakfast> DailyBreakfasts { get; set; }
+    
+    public DbSet<HotelRestaurantAPI.Models.CheckedIn> CheckedIn { get; set; }
 }
