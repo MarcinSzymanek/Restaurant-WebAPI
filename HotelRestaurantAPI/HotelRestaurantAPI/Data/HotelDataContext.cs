@@ -1,4 +1,4 @@
-﻿using HotelRestaurantAPI.Models;
+using HotelRestaurantAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelRestaurantAPI.Data;
@@ -26,5 +26,4 @@ public class HotelDataContext : DbContext
     public DbSet<DailyBreakfast> DailyBreakfasts { get; set; }
     
     public DbSet<HotelRestaurantAPI.Models.CheckedIn> CheckedIn { get; set; }
-    public DbSet<HotelRestaurantAPI.Models.Expected> Expected { get; set; }
 }
