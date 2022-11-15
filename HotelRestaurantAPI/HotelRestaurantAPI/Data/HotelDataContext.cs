@@ -1,4 +1,4 @@
-﻿using HotelRestaurantAPI.Models;
+using HotelRestaurantAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelRestaurantAPI.Data;
