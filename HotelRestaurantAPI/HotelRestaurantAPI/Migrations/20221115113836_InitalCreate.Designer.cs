@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelRestaurantAPI.Migrations
 {
     [DbContext(typeof(HotelDataContext))]
-    [Migration("20221115105502_CheckinNormalId")]
-    partial class CheckinNormalId
+    [Migration("20221115113836_InitalCreate")]
+    partial class InitalCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
