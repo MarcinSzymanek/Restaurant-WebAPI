@@ -20,6 +20,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddRazorPages();
+
+// My own service
 builder.Services.AddTransient<IReservationService, ReservationService>();
 
 Claim[] claimTypes = new Claim[3]
@@ -43,6 +45,8 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("KitchenStaff",
         policyBuilder => policyBuilder.RequireClaim("KitchenAccess")
     );
+    options.AddPolicy("WaiterStaff",
+        policyBuilder => policyBuilder.RequireClaim("WaiterAccess"));
 });
 
 
