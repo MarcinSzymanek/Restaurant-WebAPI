@@ -40,9 +40,12 @@ namespace HotelRestaurantAPI.Pages.Management
             _kitchenContext = kitchenContext;
         }
 
+        private DateTime _today = DateTime.Now;
         public async Task OnGet()
         {
-            var myExpected = await GetExpected(Input.Date);
+            
+            var myExpected = await GetExpected(_today);
+            
             if (myExpected != null)
             {
                 _adultsExpected = myExpected.Adults;
