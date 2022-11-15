@@ -27,7 +27,12 @@
         <input class="form-control" asp-for="Input.ChildrenAmount" min="0" />
         <span asp-validation-for="Input.ChildrenAmount" class="text-danger"></span>
     </div>
-
+    
+    <div>
+        <a class="btn btn-primary" asp-action="HomePage">Back to home page</a>
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
     <div asp-validation-summary="All" class="text-danger"></div>
+    
+
 </form>

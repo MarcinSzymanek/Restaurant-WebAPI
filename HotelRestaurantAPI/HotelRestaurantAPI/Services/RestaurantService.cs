@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.SignalR;
 
 namespace HotelRestaurantAPI.Services
 {
-    public class RestaurantService : Controller
+    public class RestaurantService : Hub<IRestaurantService>
     {
-        public IActionResult Index()
+        public async Task RestaurantUpdate()
         {
-            return View();
+            await Clients.All.RestaurantUpdate();
         }
     }
 }

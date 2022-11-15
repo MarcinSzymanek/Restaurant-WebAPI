@@ -9,6 +9,5 @@ public class Expected
     public int Children { get; set; } = 0;
     public int Day { get; set; }
     public int Month { get; set; }
-    public int RoomNumber { get; set; } = 0;
     public DailyBreakfast DailyBreakfast { get; set; } = default!;
 }

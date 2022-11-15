@@ -1,12 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace HotelRestaurantAPI.Services
+﻿namespace HotelRestaurantAPI.Hub
 {
-    public class IRestaurantService : Controller
+    public interface IRestaurantHub
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        Task RestaurantUpdate();
     }
 }
