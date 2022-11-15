@@ -103,9 +103,11 @@ namespace HotelRestaurantAPI.Pages.Management
 
         private async Task<Expected?> GetExpected(DateTime date)
         {
-            return await _context.Expected
+            var breakfasts = await _context.DailyBreakfasts
+                .Include(b => b.Expected)
                 .Where(p => p.Day == date.Day)
                 .FirstOrDefaultAsync();
+            return breakfasts.Expected;
         }
 
         private async Task<DailyBreakfast?> GetDailyBreakfast(DateTime date)
