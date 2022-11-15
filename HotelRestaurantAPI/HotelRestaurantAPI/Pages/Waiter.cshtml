@@ -1,0 +1,46 @@
+﻿@page
+@model WaiterModel
+@{
+    ViewData["Title"] = "Waiter Acces";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="row-cols-2">
+   
+    <div class="col">
+        <h3>Check In for Breakfast:</h3>
+        <br />
+        <div>
+            <form method="Post">
+                <h4> Enter Roomnumber</h4>
+                <label for="aamount" title="Roomnumber"></label>
+
+                RoomNumber: <input class="form-control" asp-for="Input.RoomNumber" type = "number"/>
+                <br />
+              
+                <h4>Enter guest amount: </h4>
+                <label for="Adults" title="Adults "></label>
+
+                Adults:
+                <br />
+                <input id="aamount" type="number" asp-for="Input.AdultAmount">
+                <br />
+                <label for="camount" title="Children "></label>
+                Children:
+                <br />
+                <input id="camount" type="number" asp-for="Input.ChildrenAmount">
+                <br />
+                <br />
+                <button id="reservationSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Check In</button>
+            </form>
+        </div>
+        @if (Model.ReservationMessage != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <h2>
+                    @Model.ReservationMessage
+                </h2>
+            </div>
+        }
+    </div>
+
