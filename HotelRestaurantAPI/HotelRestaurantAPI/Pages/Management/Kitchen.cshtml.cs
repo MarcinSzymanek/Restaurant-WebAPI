@@ -42,11 +42,60 @@ namespace HotelRestaurantAPI.Pages.Management
 
         public async Task OnGet()
         {
+            var myExpected = await GetExpected(Input.Date);
+            if (myExpected != null)
+            {
+                _adultsExpected = myExpected.Adults;
+                _childrenExpected = myExpected.Children;
+                _totalExpected = _adultsExpected + _childrenExpected;
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "No quest on this date");
+            }
+
+            var myDailyBreakfast = await GetDailyBreakfast(DateTime.Now);
+            if (myDailyBreakfast != null)
+            {
+                foreach (CheckedIn checkedIn in myDailyBreakfast.CheckedIn)
+                {
+                    _adultsCheckedIn += checkedIn.Adults;
+                    _childrenCheckedIn += checkedIn.Children;
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "No guest is checked in on this date");
+            }
         }
 
         public async Task OnPost()
         {
+            var myExpected = await GetExpected(Input.Date);
+            if (myExpected != null)
+            {
+                _adultsExpected = myExpected.Adults;
+                _childrenExpected = myExpected.Children;
+                _totalExpected = _adultsExpected + _childrenExpected;
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "No quest on this date");
+            }
 
+            var myDailyBreakfast = await GetDailyBreakfast(DateTime.Now);
+            if (myDailyBreakfast != null)
+            {
+                foreach (CheckedIn checkedIn in myDailyBreakfast.CheckedIn)
+                {
+                    _adultsCheckedIn += checkedIn.Adults;
+                    _childrenCheckedIn += checkedIn.Children;
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("Input.Date", "No guest is checked in on this date");
+            }
         }
 
         private async Task<Expected?> GetExpected(DateTime date)
