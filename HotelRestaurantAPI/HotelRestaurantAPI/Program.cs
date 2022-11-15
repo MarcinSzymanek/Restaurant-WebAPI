@@ -33,8 +33,19 @@ builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("ReceptionStaff",
         policyBuilder => policyBuilder.RequireClaim("ReceptionAccess")
+        
+    
+    );
+    options.AddPolicy("WaiterStaff",
+        policyBuilder => policyBuilder.RequireClaim("WaiterAccess")
+    );
+
+    options.AddPolicy("KitchenStaff",
+        policyBuilder => policyBuilder.RequireClaim("KitchenAccess")
     );
 });
+
+
     
 
 // Disable most requires so that we can test this
