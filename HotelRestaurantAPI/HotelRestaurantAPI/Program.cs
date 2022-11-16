@@ -93,6 +93,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapHub<KitchenService>("/KitchenService");
-var connection = new signalR.HubConnectionBuilder().withUrl("/KitchenService").build();
+
 
 app.Run();
