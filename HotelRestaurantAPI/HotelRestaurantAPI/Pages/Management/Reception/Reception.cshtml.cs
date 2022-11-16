@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using HotelRestaurantAPI.Data;
+using HotelRestaurantAPI.Models;
 using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -35,8 +36,9 @@ namespace HotelRestaurantAPI.Pages.Management
             _context = context;
         }
         
-        public void OnGet()
+        public async Task OnGetAsync()
         {
+           
 
         }
 
@@ -63,6 +65,8 @@ namespace HotelRestaurantAPI.Pages.Management
             
             return Page();
         }
+
+        
 
         [BindProperty] public InputModel Input { get; set; }
         public class InputModel

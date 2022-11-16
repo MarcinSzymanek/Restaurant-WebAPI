@@ -18,13 +18,11 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
         
-        public DisplayModel Display { get; set; }
-        public class DisplayModel
-        {
+
             public int RoomNumber { get; set; }
             public int Adults { get; set; } = 0;
             public int Children { get; set; } = 0;
-        }
+       
         
         public string DateNow { get; set; }
         private readonly HotelRestaurantAPI.Data.HotelDataContext _context;
@@ -50,6 +48,16 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
                 // Redirect to error page
                 RedirectToPage("Error");
             }
+
+            var breakfasts = await _context.DailyBreakfasts
+                .Include(b => b.CheckedIn)
+                .Where(p => p.Day == _day)
+                .ToListAsync();
+
+            CheckedIn = breakfasts.SelectMany(b => b.CheckedIn).ToList();
+
+            
+
         }
     }
 }

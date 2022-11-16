@@ -8,10 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HotelRestaurantAPI.Pages
 {
+  
 
     [Authorize(Policy="WaiterStaff")]
     public class WaiterModel : PageModel
     {
+        private DateTime _now = DateTime.Now;
+        private int _day = DateTime.Now.Day;
+        private int _month = DateTime.Now.Month;
+
 
         IReservationService _reservationService;
         HotelDataContext _context;
