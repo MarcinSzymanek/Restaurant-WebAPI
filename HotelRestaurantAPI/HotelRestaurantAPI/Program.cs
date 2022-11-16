@@ -14,6 +14,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(staffConnectionString));
 builder.Services.AddDbContext<HotelDataContext>(options =>
     options.UseSqlServer(hotelConnectionString));
+builder.Services.AddSignalR();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -92,5 +93,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapHub<KitchenService>("/KitchenService");
+var connection = new signalR.HubConnectionBuilder().withUrl("/KitchenService").build();
 
 app.Run();
