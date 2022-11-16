@@ -17,19 +17,12 @@
 
 <table>
     <thead>
-    <tr>
-        <th>Expected guests</th>
-    </tr>
+      <tr><th>Expected guests</th> </tr>
     </thead>
     <tbody>
+          <tr><td>Expected adults:</td> <td>@Html.DisplayFor(x => x._adultsExpected)</td> </tr>
     <tr>
-        <td>Expected adults:</td> 
-        <td>@Html.DisplayFor(x => x._adultsExpected)</td>
-    </tr>
-    <tr>
-        <td>Expected children:</td> 
-        <td>@Html.DisplayFor(x => x._childrenExpected)</td>
-    </tr>
+        <td>Expected children:</td> <td>@Html.DisplayFor(x => x._childrenExpected)</td> </tr>
     <tr>
         <td>Total of expected:</td> 
         <td>@Html.DisplayFor(x => x._totalExpected)</td>

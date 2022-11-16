@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using HotelRestaurantAPI.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HotelRestaurantAPI.Pages.Management.Reception
 {
@@ -17,9 +19,18 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
         private DateTime _now = DateTime.Now;
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
-        
 
-            public int RoomNumber { get; set; }
+        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+
+
+        public DisplayBreakfastDataModel(
+            IHubContext<KitchenService, IKitchenService> kitchenContext)
+        {
+            _kitchenContext = kitchenContext;
+        }
+
+
+        public int RoomNumber { get; set; }
             public int Adults { get; set; } = 0;
             public int Children { get; set; } = 0;
        

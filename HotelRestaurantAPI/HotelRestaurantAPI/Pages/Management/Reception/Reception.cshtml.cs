@@ -5,6 +5,7 @@ using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +17,8 @@ namespace HotelRestaurantAPI.Pages.Management
         private DateTime _now = DateTime.Now;
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
+
+      
 
         public IActionResult OnPostRedirect()
         {
@@ -30,10 +33,13 @@ namespace HotelRestaurantAPI.Pages.Management
         private IReservationService _reservationService;
         private HotelDataContext _context;
 
-        public ReceptionModel(IReservationService reservationService, HotelDataContext context)
+        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+        public ReceptionModel(IReservationService reservationService, HotelDataContext context, IHubContext<KitchenService, IKitchenService> kitchenContext)
         {
             _reservationService = reservationService;
             _context = context;
+            _kitchenContext = kitchenContext;
+            
         }
         
         public async Task OnGetAsync()

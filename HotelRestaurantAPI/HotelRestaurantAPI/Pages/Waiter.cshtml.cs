@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HotelRestaurantAPI.Pages
 {
@@ -21,12 +22,20 @@ namespace HotelRestaurantAPI.Pages
         IReservationService _reservationService;
         HotelDataContext _context;
 
+        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+        //public KitchenModel(HotelRestaurantAPI.Data.HotelDataContext context,
+        //    IHubContext<KitchenService, IKitchenService> kitchenContext)
+        //{
+        //    _context = context;
+        //    _kitchenContext = kitchenContext;
+        //}
 
-        public WaiterModel(IReservationService reservationService, HotelDataContext context)
+        public WaiterModel(IReservationService reservationService, HotelDataContext context, IHubContext<KitchenService, IKitchenService> kitchenContext )
         {
             _reservationService = reservationService;
             _context = context;
-            
+            _kitchenContext = kitchenContext;
+
         }
 
         public async Task<IActionResult> OnPostAsync()

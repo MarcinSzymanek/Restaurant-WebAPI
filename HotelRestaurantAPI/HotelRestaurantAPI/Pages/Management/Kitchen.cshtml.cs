@@ -24,7 +24,7 @@ namespace HotelRestaurantAPI.Pages.Management
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
 
-        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+     
         private readonly HotelRestaurantAPI.Data.HotelDataContext _context;
 
         public int _adultsExpected;
@@ -33,6 +33,7 @@ namespace HotelRestaurantAPI.Pages.Management
         public int _adultsCheckedIn;
         public int _childrenCheckedIn;
 
+        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
         public KitchenModel(HotelRestaurantAPI.Data.HotelDataContext context,
             IHubContext<KitchenService, IKitchenService> kitchenContext)
         {

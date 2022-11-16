@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using HotelRestaurantAPI.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HotelRestaurantAPI.Pages.Management
 {
@@ -16,9 +18,11 @@ namespace HotelRestaurantAPI.Pages.Management
     {
         private readonly HotelRestaurantAPI.Data.HotelDataContext _context;
 
-        public CheckinGuestModel(HotelRestaurantAPI.Data.HotelDataContext context)
+       private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+        public CheckinGuestModel(HotelRestaurantAPI.Data.HotelDataContext context, IHubContext<KitchenService, IKitchenService> kitchenContext)
         {
             _context = context;
+            _kitchenContext = kitchenContext;
         }
 
         public IActionResult OnGet()
