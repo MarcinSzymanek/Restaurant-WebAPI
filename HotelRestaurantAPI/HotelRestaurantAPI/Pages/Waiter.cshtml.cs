@@ -23,19 +23,12 @@ namespace HotelRestaurantAPI.Pages
         HotelDataContext _context;
 
         private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
-        //public KitchenModel(HotelRestaurantAPI.Data.HotelDataContext context,
-        //    IHubContext<KitchenService, IKitchenService> kitchenContext)
-        //{
-        //    _context = context;
-        //    _kitchenContext = kitchenContext;
-        //}
-
+        
         public WaiterModel(IReservationService reservationService, HotelDataContext context, IHubContext<KitchenService, IKitchenService> kitchenContext )
         {
             _reservationService = reservationService;
             _context = context;
             _kitchenContext = kitchenContext;
-
         }
 
         public async Task<IActionResult> OnPostAsync()

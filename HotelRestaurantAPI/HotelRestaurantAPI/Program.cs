@@ -15,13 +15,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(staffConnectionString));
 builder.Services.AddDbContext<HotelDataContext>(options =>
     options.UseSqlServer(hotelConnectionString));
-builder.Services.AddSignalR();
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 builder.Services.AddSignalR();
 
 // My own service
@@ -93,6 +93,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.UseSession();
 app.MapHub<KitchenService>("/KitchenService");
 
 

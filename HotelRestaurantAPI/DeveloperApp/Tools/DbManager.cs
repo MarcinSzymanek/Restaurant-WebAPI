@@ -26,7 +26,6 @@ public class DbManager
         _seeder = new(_hotelContext);
 
     }
-
     public bool ResetHotelDb()
     {
         var breakfasts = _hotelContext.DailyBreakfasts.ToList();
@@ -36,6 +35,12 @@ public class DbManager
             foreach (var b in breakfasts)
             {
                 _hotelContext.DailyBreakfasts.Remove(b);
+                _hotelContext.SaveChanges();
+            }
+            var checkins = _hotelContext.CheckedIn.ToList();
+            foreach (var c in checkins)
+            {
+                _hotelContext.CheckedIn.Remove(c);
                 _hotelContext.SaveChanges();
             }
         }
