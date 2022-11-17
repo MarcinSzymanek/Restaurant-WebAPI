@@ -18,8 +18,6 @@ namespace HotelRestaurantAPI.Pages.Management
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
 
-      
-
         public IActionResult OnPostRedirect()
         {
             return RedirectToPage("DisplayBreakfastData");
@@ -63,6 +61,7 @@ namespace HotelRestaurantAPI.Pages.Management
             if (success)
             {
                 ReservationMessage = "Success!";
+                _kitchenContext.Clients.All.KitchenUpdate();
             }
             else
             {
@@ -79,7 +78,7 @@ namespace HotelRestaurantAPI.Pages.Management
         {
             [Required]
             [DataType(DataType.Date)]
-            public DateTime Date { get; set; } = new DateTime(2022, 11, 14);
+            public DateTime Date { get; set; } = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
 
             public int AdultAmount { get; set; } = 0;
             public int ChildrenAmount { get; set; } = 0;

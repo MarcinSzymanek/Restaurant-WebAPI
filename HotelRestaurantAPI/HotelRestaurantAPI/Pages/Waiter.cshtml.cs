@@ -40,6 +40,7 @@ namespace HotelRestaurantAPI.Pages
             if (success)
             {
                 ReservationMessage = "Success!";
+                _kitchenContext.Clients.All.KitchenUpdate();
             }
             else
             {

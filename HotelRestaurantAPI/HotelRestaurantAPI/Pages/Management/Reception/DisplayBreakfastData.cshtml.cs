@@ -22,26 +22,22 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
 
         private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
 
-
-        public DisplayBreakfastDataModel(
-            IHubContext<KitchenService, IKitchenService> kitchenContext)
-        {
-            _kitchenContext = kitchenContext;
-        }
-
-
         public int RoomNumber { get; set; }
-            public int Adults { get; set; } = 0;
-            public int Children { get; set; } = 0;
+        public int Adults { get; set; } = 0;
+        public int Children { get; set; } = 0;
        
         
         public string DateNow { get; set; }
         private readonly HotelRestaurantAPI.Data.HotelDataContext _context;
 
-        public DisplayBreakfastDataModel(HotelRestaurantAPI.Data.HotelDataContext context)
+        public DisplayBreakfastDataModel(
+            HotelDataContext context,
+            IHubContext<KitchenService, IKitchenService> kitchenContext
+        )
         {
             _context = context;
             DateNow = _day + "/" + _month;
+            _kitchenContext = kitchenContext;
         }
 
         public IList<CheckedIn> CheckedIn { get;set; } = default!;
