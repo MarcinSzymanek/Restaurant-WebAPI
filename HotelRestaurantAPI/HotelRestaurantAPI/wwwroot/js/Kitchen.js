@@ -3,8 +3,8 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/KitchenService").build();
 
 connection.on("kitchenUpdate", function () {
-
-    window.location.reload("kitchen");
+    console.log("KITCHEN UPDATE CALLED MOTADAGAFSF");
+    window.location.reload();
 });
 
 connection.start().then(function () {
@@ -12,4 +12,8 @@ connection.start().then(function () {
 }).catch(function (err) {
     console.error(err.toString());
 });
+
+
+
+
 

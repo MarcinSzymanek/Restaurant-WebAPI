@@ -2,6 +2,7 @@ using System.Security.Claims;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,7 +20,8 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 builder.Services.AddSignalR();
 
 // My own service
@@ -91,6 +93,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+app.UseSession();
 app.MapHub<KitchenService>("/KitchenService");
+
+
 
 app.Run();

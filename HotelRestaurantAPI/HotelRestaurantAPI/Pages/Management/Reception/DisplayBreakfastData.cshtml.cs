@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Models;
 using Microsoft.AspNetCore.Authorization;
+using HotelRestaurantAPI.Services;
+using Microsoft.AspNetCore.SignalR;
 
 namespace HotelRestaurantAPI.Pages.Management.Reception
 {
@@ -17,14 +19,21 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
         private DateTime _now = DateTime.Now;
         private int _day = DateTime.Now.Day;
         private int _month = DateTime.Now.Month;
-        
-        public DisplayModel Display { get; set; }
-        public class DisplayModel
+
+        private readonly IHubContext<KitchenService, IKitchenService> _kitchenContext;
+
+
+        public DisplayBreakfastDataModel(
+            IHubContext<KitchenService, IKitchenService> kitchenContext)
         {
-            public int RoomNumber { get; set; }
+            _kitchenContext = kitchenContext;
+        }
+
+
+        public int RoomNumber { get; set; }
             public int Adults { get; set; } = 0;
             public int Children { get; set; } = 0;
-        }
+       
         
         public string DateNow { get; set; }
         private readonly HotelRestaurantAPI.Data.HotelDataContext _context;
@@ -50,6 +59,16 @@ namespace HotelRestaurantAPI.Pages.Management.Reception
                 // Redirect to error page
                 RedirectToPage("Error");
             }
+
+            var breakfasts = await _context.DailyBreakfasts
+                .Include(b => b.CheckedIn)
+                .Where(p => p.Day == _day)
+                .ToListAsync();
+
+            CheckedIn = breakfasts.SelectMany(b => b.CheckedIn).ToList();
+
+            
+
         }
     }
 }
