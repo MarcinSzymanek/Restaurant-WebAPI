@@ -2,6 +2,7 @@ using System.Security.Claims;
 using HotelRestaurantAPI.Data;
 using HotelRestaurantAPI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -93,6 +94,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapHub<KitchenService>("/KitchenService");
+
 
 
 app.Run();
