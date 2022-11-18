@@ -87,7 +87,7 @@ namespace HotelRestaurantAPI.Pages.Management
                 ModelState.AddModelError("Input.Date", "No quest on this date");
             }
 
-            var myDailyBreakfast = await GetDailyBreakfast(DateTime.Now);
+            var myDailyBreakfast = await GetDailyBreakfast(Input.Date);
             if (myDailyBreakfast != null)
             {
                 foreach (CheckedIn checkedIn in myDailyBreakfast.CheckedIn)
