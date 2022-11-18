@@ -11,19 +11,25 @@ public class DataSeeder
     {
         _context = context;
     }
-    /*
-     * All seeding functions go into this class
-     */
-    public void SeedReservations(int startDay)
+    
+
+    public void SeedBreakfasts(int startDay)
     {
-        List<DailyBreakfast> reservations = new();
-        for (int i = startDay; i < startDay + 7; i++)
+        List<DailyBreakfast> breakfasts = new();
+        for (int i = startDay; i < startDay + 30; i++)
         {
-            var b = new DailyBreakfast() { Day = i, Month = 11 };
-            reservations.Add(b);
+            int d = i;
+            int m = DateTime.Now.Month;
+            if (i > 31)
+            {
+                d -= 31;
+                m++;
+            }
+            var b = new DailyBreakfast() { Day = d, Month = m };
+            breakfasts.Add(b);
         }
 
-        foreach (var b in reservations)
+        foreach (var b in breakfasts)
         {
             _context.DailyBreakfasts.Add(b);
             _context.SaveChanges();

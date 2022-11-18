@@ -7,13 +7,14 @@ using HotelRestaurantAPI.Models;
 using Microsoft.CodeAnalysis.VisualBasic.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualBasic;
 
 
-Console.WriteLine("Hello, World!");
-
+Console.WriteLine("For first time setup, enter 'Initialize'");
+Console.WriteLine("'quit' to Quit this app");
 DbManager manager = new();
 
-Console.WriteLine("Database loaded");
+Console.WriteLine("Database manager loaded");
 
 bool done = false;
 while (!done)
@@ -27,12 +28,20 @@ while (!done)
             done = true;
             break;
         }
+        // Use this command to update both databases in mssql
+        // Also seeds DailyBreakfasts data
+        // Does NOT seed users
+        case "Initialize":
+        {
+            manager.InitSystem();
+            break;
+        }
         case "seed":
         {
             Console.WriteLine("Seeding data.");
             try
             {
-                manager.Seeder.SeedReservations(14);
+                manager.Seeder.SeedBreakfasts(DateTime.Now.Day - 10);
             }
             catch(Exception ex)
             {
